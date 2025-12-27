@@ -1,0 +1,4 @@
+.env
+influxdb_data/
+nodered_data/
+grafana_data/

@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # ---------------------------------------------------------
+  # SERVICE 1: NODE-RED (The Logic / Brain)
+  # ---------------------------------------------------------
+  nodered:
+    image: nodered/node-red:latest       # Download the latest Node-RED manual
+    container_name: iot_nodered          # Name the box "iot_nodered" so we can find it
+    ports:
+      - "1880:1880"                      # Open Port 1880 (Windows) -> Port 1880 (Container)
+    volumes:
+      - ./nodered_data:/data             # SAVE WORK: Link "nodered_data" folder to container
+    restart: unless-stopped              # If it crashes, restart it automatically
+    depends_on:
+      - influxdb                         # Don't start until the Database is ready
+
+  # ---------------------------------------------------------
+  # SERVICE 2: INFLUXDB (The Database / Warehouse)
+  # ---------------------------------------------------------
+  influxdb:
+    image: influxdb:2.7                  # Download InfluxDB version 2.7
+    container_name: iot_influxdb
+    ports:
+      - "8086:8086"                      # Open Port 8086 for the web interface
+    volumes:
+      - ./influxdb_data:/var/lib/influxdb2  # SAVE DATA: Link "influxdb_data" folder to container
+    env_file:
+      - .env                             # READ SECRETS: Look at the .env file we just made
+    environment:                         # APPLY SECRETS: Use the variables from .env
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUX_USER}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUX_PASS}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUX_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUX_BUCKET}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUX_TOKEN}
+
+  # ---------------------------------------------------------
+  # SERVICE 3: GRAFANA (The Dashboard / TV Screen)
+  # ---------------------------------------------------------
+  grafana:
+    image: grafana/grafana:latest        # Download the latest Grafana
+    container_name: iot_grafana
+    ports:
+      - "3000:3000"                      # Open Port 3000 for the website
+    volumes:
+      - ./grafana_data:/var/lib/grafana  # SAVE DASHBOARDS: Link "grafana_data" folder
+    restart: unless-stopped
+    depends_on:
+      - influxdb                         # Wait for database before starting

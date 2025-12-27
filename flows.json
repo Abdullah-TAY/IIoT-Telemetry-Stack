@@ -1,0 +1,239 @@
+[
+    {
+        "id": "6c8fce1b80e7d91a",
+        "type": "tab",
+        "label": "IoT-DigitalTwin",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "505694679d42dd20",
+        "type": "inject",
+        "z": "6c8fce1b80e7d91a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "7711eeeb9e493a8f"
+            ]
+        ]
+    },
+    {
+        "id": "dbc23fd8ed8e9a99",
+        "type": "influxdb out",
+        "z": "6c8fce1b80e7d91a",
+        "influxdb": "c6d8b97ec5668adb",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "factory-org",
+        "bucket": "sensors",
+        "x": 790,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7711eeeb9e493a8f",
+        "type": "function",
+        "z": "6c8fce1b80e7d91a",
+        "name": "Generate FLOW",
+        "func": "// RESTORED FLOW CODE\n// Simulate Flow Rate between 50 and 60\nvar myFlow = 50 + Math.random() * 10;\n\nmsg.payload = myFlow;\nmsg.measurement = \"flow_sensor\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 140,
+        "wires": [
+            [
+                "dbc23fd8ed8e9a99"
+            ]
+        ]
+    },
+    {
+        "id": "766a053237ead34c",
+        "type": "inject",
+        "z": "6c8fce1b80e7d91a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "dc1e34133a703f7a"
+            ]
+        ]
+    },
+    {
+        "id": "dc1e34133a703f7a",
+        "type": "function",
+        "z": "6c8fce1b80e7d91a",
+        "name": "Generate Temp",
+        "func": "// Simulate Temperature between 80 and 90 C\nvar heat = 80 + Math.random() * 10;\n\nmsg.payload = heat;\nmsg.measurement = \"temp_sensor\";  // <--- This is the key change!\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "dbc23fd8ed8e9a99"
+            ]
+        ]
+    },
+    {
+        "id": "6955f7904cd0c663",
+        "type": "inject",
+        "z": "6c8fce1b80e7d91a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 380,
+        "wires": [
+            [
+                "15c6c42e3c742170"
+            ]
+        ]
+    },
+    {
+        "id": "15c6c42e3c742170",
+        "type": "function",
+        "z": "6c8fce1b80e7d91a",
+        "name": "Generate Pressure",
+        "func": "// Simulate High Pressure (200 - 250 Bar)\nvar pressure = 200 + Math.random() * 50;\n\nmsg.payload = pressure;\nmsg.measurement = \"pressure_sensor\"; \n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "dbc23fd8ed8e9a99"
+            ]
+        ]
+    },
+    {
+        "id": "14ed7371a4961e89",
+        "type": "inject",
+        "z": "6c8fce1b80e7d91a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "666a2f8043cbd1ec"
+            ]
+        ]
+    },
+    {
+        "id": "666a2f8043cbd1ec",
+        "type": "function",
+        "z": "6c8fce1b80e7d91a",
+        "name": "Generate Pressure",
+        "func": "// Simulate Motor Speed (1000 - 1500 RPM)\nvar rpm = 1000 + Math.random() * 500;\n\nmsg.payload = rpm;\nmsg.measurement = \"rpm_sensor\"; \n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 500,
+        "wires": [
+            [
+                "dbc23fd8ed8e9a99"
+            ]
+        ]
+    },
+    {
+        "id": "c6d8b97ec5668adb",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "Docker Influx",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    }
+]
