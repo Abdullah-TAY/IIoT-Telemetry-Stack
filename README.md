@@ -20,14 +20,12 @@ A containerized Industrial IoT (IIoT) pipeline for simulating, capturing, and vi
     * **Hydraulic Pressure** (200-250 Bar)
     * **Motor Speed** (1000-1500 RPM)
 * **Edge Intelligence:** Node-RED flows process raw inputs and tag data before storage.
-* **Alerting Logic:** Automated monitoring detects high-pressure events (> 240 Bar) and flags them in the system.
-* **Dual-Axis Visualization:** Grafana dashboard correlates high-speed RPM data against lower-magnitude pressure/flow readings using multi-axis graphing.
+* **Visualization:** Grafana dashboard correlates high-speed RPM data against lower-magnitude pressure/flow readings using multi-axis graphing.
 
 ## 📋 Prerequisites
 Before running this project, ensure you have the following installed:
 * **Docker Desktop** (or Docker Engine + Compose)
 * **Git** (to clone the repository)
-* **4GB RAM** available (InfluxDB requires moderate memory)
 
 ## 🚀 How to Run
 
@@ -69,4 +67,3 @@ docker-compose up -d
 * Import the dashboard JSON file (if included) or create your panels.
 
 ---
-*Created as a portfolio project to demonstrate Full Stack IIoT architecture and containerized sensor data pipelines.*
