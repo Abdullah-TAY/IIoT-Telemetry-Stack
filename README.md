@@ -26,7 +26,7 @@ A containerized Industrial IoT (IIoT) pipeline for simulating, capturing, and vi
 ## 🚀 How to Run
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YOUR-USERNAME/IIoT-Telemetry-Stack.git](https://github.com/YOUR-USERNAME/IIoT-Telemetry-Stack.git)
+    git clone [https://github.com/Abdullah-TAY/IIoT-Telemetry-Stack.git](https://github.com/Abdullah-TAY/IIoT-Telemetry-Stack.git)
     ```
 2.  **Configure Security:**
     Create a `.env` file in the root directory and add your InfluxDB admin token.
